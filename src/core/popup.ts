@@ -394,6 +394,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 				// Initial content load
 				await refreshFields(currentTabId);
+
+				// Auto-save immediately after initialization if enabled
+				if (generalSettings.autoSave) {
+					setTimeout(() => {
+						handleClipObsidian().catch(error => {
+							console.error('Auto-save failed:', error);
+						});
+					}, 100);
+				}
 			} catch (error) {
 				console.error('Error initializing popup:', error);
 				showError(getMessage('pleaseReload'));
