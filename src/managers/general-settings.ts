@@ -217,6 +217,7 @@ export function initializeGeneralSettings(): void {
 		initializeLegacyModeToggle();
 		initializeSilentOpenToggle();
 		initializeAutoSaveToggle();
+		initializeObsidianWebhookUrlInput();
 		initializeVaultInput();
 		initializeOpenBehaviorDropdown();
 		initializeKeyboardShortcuts();
@@ -255,6 +256,7 @@ function saveSettingsFromForm(): void {
 	const legacyModeToggle = document.getElementById('legacy-mode-toggle') as HTMLInputElement;
 	const silentOpenToggle = document.getElementById('silent-open-toggle') as HTMLInputElement;
 	const autoSaveToggle = document.getElementById('auto-save-toggle') as HTMLInputElement;
+	const obsidianWebhookUrlInput = document.getElementById('obsidian-webhook-url') as HTMLInputElement;
 	const highlighterToggle = document.getElementById('highlighter-toggle') as HTMLInputElement;
 	const alwaysShowHighlightsToggle = document.getElementById('highlighter-visibility') as HTMLInputElement;
 	const highlightBehaviorSelect = document.getElementById('highlighter-behavior') as HTMLSelectElement;
@@ -267,6 +269,7 @@ function saveSettingsFromForm(): void {
 		legacyMode: legacyModeToggle?.checked ?? generalSettings.legacyMode,
 		silentOpen: silentOpenToggle?.checked ?? generalSettings.silentOpen,
 		autoSave: autoSaveToggle?.checked ?? generalSettings.autoSave,
+		obsidianWebhookUrl: obsidianWebhookUrlInput?.value.trim() ?? generalSettings.obsidianWebhookUrl,
 		highlighterEnabled: highlighterToggle?.checked ?? generalSettings.highlighterEnabled,
 		alwaysShowHighlights: alwaysShowHighlightsToggle?.checked ?? generalSettings.alwaysShowHighlights,
 		highlightBehavior: highlightBehaviorSelect?.value ?? generalSettings.highlightBehavior
@@ -351,6 +354,16 @@ function initializeAutoSaveToggle(): void {
 	initializeSettingToggle('auto-save-toggle', generalSettings.autoSave, (checked) => {
 		saveSettings({ ...generalSettings, autoSave: checked });
 	});
+}
+
+function initializeObsidianWebhookUrlInput(): void {
+	const input = document.getElementById('obsidian-webhook-url') as HTMLInputElement;
+	if (input) {
+		input.value = generalSettings.obsidianWebhookUrl;
+		input.addEventListener('change', () => {
+			saveSettings({ ...generalSettings, obsidianWebhookUrl: input.value.trim() });
+		});
+	}
 }
 
 function initializeOpenBehaviorDropdown(): void {

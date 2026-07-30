@@ -6,6 +6,48 @@ import { generalSettings, incrementStat } from './storage-utils';
 import { copyToClipboard } from './clipboard-utils';
 import { getMessage } from './i18n';
 
+interface WebhookCheckResponse {
+	result: number;
+	data?: string;
+}
+
+export async function checkNoteExists(noteTitle: string): Promise<string | null> {
+	const webhookUrl = generalSettings.obsidianWebhookUrl?.trim();
+	if (!webhookUrl) return null;
+
+	try {
+		const response = await fetch(webhookUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ note_title: noteTitle })
+		});
+
+		if (!response.ok) {
+			console.error('Duplicate-check webhook returned error:', response.status, response.statusText);
+			return null;
+		}
+
+		const result: WebhookCheckResponse = await response.json();
+		if (result.result === 1 && typeof result.data === 'string' && result.data.indexOf('笔记已存在') === 0) {
+			const parts = result.data.split(': ');
+			if (parts.length >= 2) {
+				return parts.slice(1).join(': ').trim();
+			}
+		}
+		return null;
+	} catch (error) {
+		console.error('Failed to call duplicate-check webhook:', error);
+		return null;
+	}
+}
+
+export function openExistingNote(notePath: string, vault: string): void {
+	const vaultParam = vault ? `vault=${encodeURIComponent(vault)}` : '';
+	const fileParam = `file=${encodeURIComponent(notePath)}`;
+	const obsidianUrl = `obsidian://open?${[vaultParam, fileParam].filter(Boolean).join('&')}`;
+	openObsidianUrl(obsidianUrl);
+}
+
 export async function generateFrontmatter(properties: Property[]): Promise<string> {
 	const typeMap: Record<string, string> = {};
 	for (const pt of generalSettings.propertyTypes) {
