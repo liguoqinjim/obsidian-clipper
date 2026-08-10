@@ -150,6 +150,24 @@
 	"custom": {
 		"message": "自定义"
 	},
+	"autoSave": {
+		"message": "自动保存"
+	},
+	"autoSaveDescription": {
+		"message": "打开 Web Clipper 时自动保存页面。"
+	},
+	"obsidianWebhookUrl": {
+		"message": "查重 webhook"
+	},
+	"obsidianWebhookUrlDescription": {
+		"message": "可选的 webhook URL，用于保存前检查笔记是否已存在。留空则禁用。"
+	},
+	"postWebhookUrl": {
+		"message": "保存后 webhook"
+	},
+	"postWebhookUrlDescription": {
+		"message": "可选的 webhook URL，在笔记创建后调用。留空则禁用。"
+	},
 	"dailyNoteFormat": {
 		"message": "日记格式（如：YYYY-MM-DD）"
 	},

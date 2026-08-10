@@ -215,18 +215,34 @@
 											</div>
 										</div>
 									</div>
-									<div class="setting-item mod-horizontal">
-										<div class="setting-item-info">
-											<label for="obsidian-webhook-url" data-i18n="obsidianWebhookUrl">Duplicate check webhook</label>
-											<div class="setting-item-description" data-i18n="obsidianWebhookUrlDescription">
-												Optional webhook URL to check if a note already exists before saving. Leave blank to disable.
-											</div>
-										</div>
-										<div class="setting-item-control">
-											<input type="text" id="obsidian-webhook-url" placeholder="https://example.com/webhook" />
-										</div>
 									</div>
 								</div>
+								<div class="setting-group">
+									<div class="setting-item setting-item-heading"><h3 data-i18n="custom">Custom</h3></div>
+									<div class="setting-items">
+										<div class="setting-item mod-horizontal">
+											<div class="setting-item-info">
+												<label for="obsidian-webhook-url" data-i18n="obsidianWebhookUrl">Duplicate check webhook</label>
+												<div class="setting-item-description" data-i18n="obsidianWebhookUrlDescription">
+													Optional webhook URL to check if a note already exists before saving. Leave blank to disable.
+												</div>
+											</div>
+											<div class="setting-item-control">
+												<input type="text" id="obsidian-webhook-url" placeholder="https://example.com/webhook" />
+											</div>
+										</div>
+										<div class="setting-item mod-horizontal">
+											<div class="setting-item-info">
+												<label for="post-webhook-url" data-i18n="postWebhookUrl">Post webhook</label>
+												<div class="setting-item-description" data-i18n="postWebhookUrlDescription">
+													Optional webhook URL called after a note is created. Leave blank to disable.
+												</div>
+											</div>
+											<div class="setting-item-control">
+												<input type="text" id="post-webhook-url" placeholder="https://example.com/webhook" />
+											</div>
+										</div>
+									</div>
 								<div class="setting-item setting-item-heading"><h3 data-i18n="advanced">Advanced</h3></div>
 								<div class="setting-items">
 									<div class="setting-item mod-horizontal">

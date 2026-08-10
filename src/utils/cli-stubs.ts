@@ -13,6 +13,7 @@ export const generalSettings: Settings = {
 	silentOpen: false,
 	autoSave: false,
 	obsidianWebhookUrl: '',
+	postWebhookUrl: '',
 	openBehavior: 'popup',
 	highlighterEnabled: false,
 	alwaysShowHighlights: false,

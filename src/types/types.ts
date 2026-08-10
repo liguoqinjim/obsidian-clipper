@@ -78,6 +78,7 @@ export interface Settings {
 	silentOpen: boolean;
 	autoSave: boolean;
 	obsidianWebhookUrl: string;
+	postWebhookUrl: string;
 	openBehavior: 'popup' | 'embedded' | 'reader';
 	highlighterEnabled: boolean;
 	alwaysShowHighlights: boolean;

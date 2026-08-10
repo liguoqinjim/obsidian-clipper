@@ -218,6 +218,7 @@ export function initializeGeneralSettings(): void {
 		initializeSilentOpenToggle();
 		initializeAutoSaveToggle();
 		initializeObsidianWebhookUrlInput();
+		initializePostWebhookUrlInput();
 		initializeVaultInput();
 		initializeOpenBehaviorDropdown();
 		initializeKeyboardShortcuts();
@@ -257,6 +258,7 @@ function saveSettingsFromForm(): void {
 	const silentOpenToggle = document.getElementById('silent-open-toggle') as HTMLInputElement;
 	const autoSaveToggle = document.getElementById('auto-save-toggle') as HTMLInputElement;
 	const obsidianWebhookUrlInput = document.getElementById('obsidian-webhook-url') as HTMLInputElement;
+	const postWebhookUrlInput = document.getElementById('post-webhook-url') as HTMLInputElement;
 	const highlighterToggle = document.getElementById('highlighter-toggle') as HTMLInputElement;
 	const alwaysShowHighlightsToggle = document.getElementById('highlighter-visibility') as HTMLInputElement;
 	const highlightBehaviorSelect = document.getElementById('highlighter-behavior') as HTMLSelectElement;
@@ -270,6 +272,7 @@ function saveSettingsFromForm(): void {
 		silentOpen: silentOpenToggle?.checked ?? generalSettings.silentOpen,
 		autoSave: autoSaveToggle?.checked ?? generalSettings.autoSave,
 		obsidianWebhookUrl: obsidianWebhookUrlInput?.value.trim() ?? generalSettings.obsidianWebhookUrl,
+		postWebhookUrl: postWebhookUrlInput?.value.trim() ?? generalSettings.postWebhookUrl,
 		highlighterEnabled: highlighterToggle?.checked ?? generalSettings.highlighterEnabled,
 		alwaysShowHighlights: alwaysShowHighlightsToggle?.checked ?? generalSettings.alwaysShowHighlights,
 		highlightBehavior: highlightBehaviorSelect?.value ?? generalSettings.highlightBehavior
@@ -362,6 +365,16 @@ function initializeObsidianWebhookUrlInput(): void {
 		input.value = generalSettings.obsidianWebhookUrl;
 		input.addEventListener('change', () => {
 			saveSettings({ ...generalSettings, obsidianWebhookUrl: input.value.trim() });
+		});
+	}
+}
+
+function initializePostWebhookUrlInput(): void {
+	const input = document.getElementById('post-webhook-url') as HTMLInputElement;
+	if (input) {
+		input.value = generalSettings.postWebhookUrl;
+		input.addEventListener('change', () => {
+			saveSettings({ ...generalSettings, postWebhookUrl: input.value.trim() });
 		});
 	}
 }

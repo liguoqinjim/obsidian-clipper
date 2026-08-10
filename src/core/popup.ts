@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Template, Property, PromptVariable } from '../types/types';
 import { incrementStat, addHistoryEntry, getClipHistory } from '../utils/storage-utils';
-import { generateFrontmatter, saveToObsidian, checkNoteExists, openExistingNote } from '../utils/obsidian-note-creator';
+import { generateFrontmatter, saveToObsidian, checkNoteExists, openExistingNote, callPostWebhook } from '../utils/obsidian-note-creator';
 import { extractPageContent, initializePageContent } from '../utils/content-extractor';
 import { compileTemplate } from '../utils/template-compiler';
 import { initializeIcons, getPropertyTypeIcon } from '../icons/icons';
@@ -1364,9 +1364,13 @@ async function handleClipObsidian(): Promise<void> {
 			}
 		}
 
-		await saveToObsidian(fileContent, noteName, path, selectedVault, currentTemplate.behavior);
 		const tabInfo = await getCurrentTabInfo();
+		await saveToObsidian(fileContent, noteName, path, selectedVault, currentTemplate.behavior);
 		await incrementStat('addToObsidian', selectedVault, path, tabInfo.url, tabInfo.title);
+
+		if (!isDailyNote && noteName) {
+			await callPostWebhook(tabInfo.title || noteName, tabInfo.url, noteName, path, selectedVault);
+		}
 
 		lastSelectedVault = selectedVault;
 		await setLocalStorage('lastSelectedVault', lastSelectedVault);

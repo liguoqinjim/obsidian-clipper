@@ -13,6 +13,7 @@ export let generalSettings: Settings = {
 	silentOpen: false,
 	autoSave: false,
 	obsidianWebhookUrl: '',
+	postWebhookUrl: '',
 	openBehavior: 'popup',
 	highlighterEnabled: true,
 	alwaysShowHighlights: false,
@@ -68,6 +69,7 @@ interface StorageData {
 		silentOpen?: boolean;
 		autoSave?: boolean;
 		obsidianWebhookUrl?: string;
+		postWebhookUrl?: string;
 		openBehavior?: boolean | 'popup' | 'embedded';
 		saveBehavior?: 'addToObsidian' | 'copyToClipboard' | 'saveFile';
 	};
@@ -128,6 +130,7 @@ export async function loadSettings(): Promise<Settings> {
 		silentOpen: false,
 		autoSave: false,
 		obsidianWebhookUrl: '',
+		postWebhookUrl: '',
 		openBehavior: 'popup',
 		highlighterEnabled: true,
 		alwaysShowHighlights: true,
@@ -191,6 +194,7 @@ export async function loadSettings(): Promise<Settings> {
 		silentOpen: data.general_settings?.silentOpen ?? defaultSettings.silentOpen,
 		autoSave: data.general_settings?.autoSave ?? defaultSettings.autoSave,
 		obsidianWebhookUrl: data.general_settings?.obsidianWebhookUrl ?? defaultSettings.obsidianWebhookUrl,
+		postWebhookUrl: data.general_settings?.postWebhookUrl ?? defaultSettings.postWebhookUrl,
 		openBehavior: typeof data.general_settings?.openBehavior === 'boolean' 
 			? (data.general_settings.openBehavior ? 'embedded' : 'popup') 
 			: (data.general_settings?.openBehavior ?? defaultSettings.openBehavior),
@@ -246,6 +250,7 @@ export async function saveSettings(settings?: Partial<Settings>): Promise<void> 
 			silentOpen: generalSettings.silentOpen,
 			autoSave: generalSettings.autoSave,
 			obsidianWebhookUrl: generalSettings.obsidianWebhookUrl,
+			postWebhookUrl: generalSettings.postWebhookUrl,
 			openBehavior: generalSettings.openBehavior,
 			saveBehavior: generalSettings.saveBehavior,
 		},

@@ -481,6 +481,12 @@
 	"obsidianWebhookUrlDescription": {
 		"message": "Optional webhook URL to check if a note already exists before saving. Leave blank to disable."
 	},
+	"postWebhookUrl": {
+		"message": "Post webhook"
+	},
+	"postWebhookUrlDescription": {
+		"message": "Optional webhook URL called after a note is created. Leave blank to disable."
+	},
 	"loadArticle": {
 		"message": "Read article"
 	},

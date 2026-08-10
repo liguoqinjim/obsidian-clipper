@@ -48,6 +48,38 @@ export function openExistingNote(notePath: string, vault: string): void {
 	openObsidianUrl(obsidianUrl);
 }
 
+export async function callPostWebhook(
+	pageTitle: string,
+	pageUrl: string,
+	noteName: string,
+	path: string,
+	vault: string,
+): Promise<void> {
+	const webhookUrl = generalSettings.postWebhookUrl?.trim();
+	if (!webhookUrl) return;
+
+	const filePath = path ? `${path}/${noteName}` : noteName;
+	const obsidianUrl = `obsidian://open?vault=${encodeURIComponent(vault)}&file=${encodeURIComponent(filePath)}`;
+
+	try {
+		await fetch(webhookUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				text: `[${pageTitle}](${pageUrl})`,
+				notes: `[ob](${obsidianUrl})`,
+				checklist: [
+					{ text: 'ANKI' },
+					{ text: 'OB笔记-score' }
+				],
+				bottom: true
+			})
+		});
+	} catch (error) {
+		console.error('Failed to call post webhook:', error);
+	}
+}
+
 export async function generateFrontmatter(properties: Property[]): Promise<string> {
 	const typeMap: Record<string, string> = {};
 	for (const pt of generalSettings.propertyTypes) {
