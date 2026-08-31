@@ -72,7 +72,9 @@ export async function callPostWebhook(
 					{ text: 'ANKI' },
 					{ text: 'OB笔记-score' }
 				],
-				bottom: true
+				bottom: true,
+				allow_duplicate: false,
+				allow_update_when_duplicate: true
 			})
 		});
 	} catch (error) {
