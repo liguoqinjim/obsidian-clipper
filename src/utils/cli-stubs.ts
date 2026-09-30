@@ -48,6 +48,7 @@ export const generalSettings: Settings = {
 		saveFile: 0,
 		copyToClipboard: 0,
 		share: 0,
+		readerMode: 0,
 	},
 	history: [],
 	ratings: [],
