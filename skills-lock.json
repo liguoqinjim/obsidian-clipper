@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "chrome-devtools-cli": {
+      "source": "ChromeDevTools/chrome-devtools-mcp",
+      "ref": "main",
+      "sourceType": "github",
+      "skillPath": "skills/chrome-devtools-cli/SKILL.md",
+      "computedHash": "2c797862626b5b48b6e6af9ca377342711066117fb354c1b4ed240f0bef18edc"
+    }
+  }
+}
