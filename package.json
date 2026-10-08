@@ -13,6 +13,7 @@
 		"./api": "./dist/api.mjs"
 	},
 	"scripts": {
+		"postinstall": "node scripts/patch-defuddle.js",
 		"defuddle-dev": "node scripts/set-defuddle-dev.js",
 		"defuddle-prod": "node scripts/set-defuddle-prod.js",
 		"dev:chrome": "webpack --watch --env BROWSER=chrome --mode development",
