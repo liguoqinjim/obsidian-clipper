@@ -612,6 +612,16 @@ async function initializeUI() {
 			browser.runtime.sendMessage({ action: "sidePanelClosed" });
 		});
 	}
+
+	// Only show the Habitica task checkbox when a post-webhook is configured
+	const habiticaToggle = document.getElementById('habitica-task-container');
+	if (habiticaToggle && generalSettings.postWebhookUrl) {
+		habiticaToggle.style.display = 'flex';
+		const habiticaCheckbox = document.getElementById('habitica-task-checkbox') as HTMLInputElement | null;
+		if (habiticaCheckbox) {
+			habiticaCheckbox.checked = generalSettings.habiticaTaskDefaultChecked;
+		}
+	}
 }
 
 function showError(messageKey: string): void {
@@ -1371,7 +1381,10 @@ async function handleClipObsidian(): Promise<void> {
 		await incrementStat('addToObsidian', selectedVault, path, tabInfo.url, tabInfo.title);
 
 		if (!isDailyNote && noteName) {
-			await callPostWebhook(tabInfo.title || noteName, tabInfo.url, noteName, path, selectedVault);
+			const habiticaCheckbox = document.getElementById('habitica-task-checkbox') as HTMLInputElement | null;
+			if (habiticaCheckbox?.checked) {
+				await callPostWebhook(tabInfo.title || noteName, tabInfo.url, noteName, path, selectedVault);
+			}
 		}
 
 		lastSelectedVault = selectedVault;

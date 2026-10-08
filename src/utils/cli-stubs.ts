@@ -14,6 +14,7 @@ export const generalSettings: Settings = {
 	autoSave: false,
 	obsidianWebhookUrl: '',
 	postWebhookUrl: '',
+	habiticaTaskDefaultChecked: false,
 	openBehavior: 'popup',
 	highlighterEnabled: false,
 	alwaysShowHighlights: false,

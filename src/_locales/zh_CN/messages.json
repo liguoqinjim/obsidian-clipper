@@ -162,6 +162,15 @@
 	"obsidianWebhookUrlDescription": {
 		"message": "可选的 webhook URL，用于保存前检查笔记是否已存在。留空则禁用。"
 	},
+	"createHabiticaTask": {
+		"message": "创建 Habitica 任务"
+	},
+	"habiticaTaskDefaultChecked": {
+		"message": "默认创建 Habitica 任务"
+	},
+	"habiticaTaskDefaultCheckedDescription": {
+		"message": "弹窗中「创建 Habitica 任务」复选框的默认勾选状态。"
+	},
 	"postWebhookUrl": {
 		"message": "保存后 webhook"
 	},

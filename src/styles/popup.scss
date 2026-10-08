@@ -154,6 +154,15 @@
 			font-size: var(--clipper-button-font-size);
 		}
 	}
+	.habitica-task-toggle {
+		display: flex;
+		align-items: center;
+		gap: 0.375rem;
+		font-size: var(--font-ui-smaller);
+		color: var(--text-muted);
+		cursor: pointer;
+		user-select: none;
+	}
 	.vault-path-container {
 		display: flex;
 		flex-direction: row;

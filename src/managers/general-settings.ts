@@ -217,6 +217,7 @@ export function initializeGeneralSettings(): void {
 		initializeLegacyModeToggle();
 		initializeSilentOpenToggle();
 		initializeAutoSaveToggle();
+		initializeHabiticaTaskDefaultToggle();
 		initializeObsidianWebhookUrlInput();
 		initializePostWebhookUrlInput();
 		initializeVaultInput();
@@ -257,6 +258,7 @@ function saveSettingsFromForm(): void {
 	const legacyModeToggle = document.getElementById('legacy-mode-toggle') as HTMLInputElement;
 	const silentOpenToggle = document.getElementById('silent-open-toggle') as HTMLInputElement;
 	const autoSaveToggle = document.getElementById('auto-save-toggle') as HTMLInputElement;
+	const habiticaTaskDefaultToggle = document.getElementById('habitica-task-default-toggle') as HTMLInputElement;
 	const obsidianWebhookUrlInput = document.getElementById('obsidian-webhook-url') as HTMLInputElement;
 	const postWebhookUrlInput = document.getElementById('post-webhook-url') as HTMLInputElement;
 	const highlighterToggle = document.getElementById('highlighter-toggle') as HTMLInputElement;
@@ -271,6 +273,7 @@ function saveSettingsFromForm(): void {
 		legacyMode: legacyModeToggle?.checked ?? generalSettings.legacyMode,
 		silentOpen: silentOpenToggle?.checked ?? generalSettings.silentOpen,
 		autoSave: autoSaveToggle?.checked ?? generalSettings.autoSave,
+		habiticaTaskDefaultChecked: habiticaTaskDefaultToggle?.checked ?? generalSettings.habiticaTaskDefaultChecked,
 		obsidianWebhookUrl: obsidianWebhookUrlInput?.value.trim() ?? generalSettings.obsidianWebhookUrl,
 		postWebhookUrl: postWebhookUrlInput?.value.trim() ?? generalSettings.postWebhookUrl,
 		highlighterEnabled: highlighterToggle?.checked ?? generalSettings.highlighterEnabled,
@@ -356,6 +359,12 @@ function initializeSilentOpenToggle(): void {
 function initializeAutoSaveToggle(): void {
 	initializeSettingToggle('auto-save-toggle', generalSettings.autoSave, (checked) => {
 		saveSettings({ ...generalSettings, autoSave: checked });
+	});
+}
+
+function initializeHabiticaTaskDefaultToggle(): void {
+	initializeSettingToggle('habitica-task-default-toggle', generalSettings.habiticaTaskDefaultChecked, (checked) => {
+		saveSettings({ ...generalSettings, habiticaTaskDefaultChecked: checked });
 	});
 }
 

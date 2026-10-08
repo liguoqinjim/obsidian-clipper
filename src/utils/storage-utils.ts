@@ -13,6 +13,7 @@ export let generalSettings: Settings = {
 	autoSave: false,
 	obsidianWebhookUrl: '',
 	postWebhookUrl: '',
+	habiticaTaskDefaultChecked: false,
 	openBehavior: 'popup',
 	highlighterEnabled: true,
 	alwaysShowHighlights: false,
@@ -70,6 +71,7 @@ interface StorageData {
 		autoSave?: boolean;
 		obsidianWebhookUrl?: string;
 		postWebhookUrl?: string;
+		habiticaTaskDefaultChecked?: boolean;
 		openBehavior?: boolean | 'popup' | 'embedded';
 		saveBehavior?: 'addToObsidian' | 'copyToClipboard' | 'saveFile';
 	};
@@ -132,6 +134,7 @@ export async function loadSettings(): Promise<Settings> {
 		autoSave: false,
 		obsidianWebhookUrl: '',
 		postWebhookUrl: '',
+		habiticaTaskDefaultChecked: false,
 		openBehavior: 'popup',
 		highlighterEnabled: true,
 		alwaysShowHighlights: true,
@@ -197,6 +200,7 @@ export async function loadSettings(): Promise<Settings> {
 		autoSave: data.general_settings?.autoSave ?? defaultSettings.autoSave,
 		obsidianWebhookUrl: data.general_settings?.obsidianWebhookUrl ?? defaultSettings.obsidianWebhookUrl,
 		postWebhookUrl: data.general_settings?.postWebhookUrl ?? defaultSettings.postWebhookUrl,
+		habiticaTaskDefaultChecked: data.general_settings?.habiticaTaskDefaultChecked ?? defaultSettings.habiticaTaskDefaultChecked,
 		openBehavior: typeof data.general_settings?.openBehavior === 'boolean' 
 			? (data.general_settings.openBehavior ? 'embedded' : 'popup') 
 			: (data.general_settings?.openBehavior ?? defaultSettings.openBehavior),
@@ -253,6 +257,7 @@ export async function saveSettings(settings?: Partial<Settings>): Promise<void> 
 			autoSave: generalSettings.autoSave,
 			obsidianWebhookUrl: generalSettings.obsidianWebhookUrl,
 			postWebhookUrl: generalSettings.postWebhookUrl,
+			habiticaTaskDefaultChecked: generalSettings.habiticaTaskDefaultChecked,
 			openBehavior: generalSettings.openBehavior,
 			saveBehavior: generalSettings.saveBehavior,
 		},
